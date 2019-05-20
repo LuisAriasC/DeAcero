@@ -1,0 +1,69 @@
+<!-- Sidebar -->
+<ul class="position-static navbar-nav bg-black sidebar sidebar-dark accordion sidebarTemp" id="accordionSidebar">
+
+  <!-- Sidebar - Brand -->
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="consumo-global.html">
+    <div class="sidebar-brand-icon rotate-n-15">
+    </div>
+    <div class="sidebar-brand-text mx-3"> {{ identity.name }} <sup></sup></div>
+  </a>
+
+  <!-- Divider -->
+
+  <!-- Divider -->
+  <hr class="sidebar-divider">
+
+  <!-- Heading -->
+  <div class="sidebar-heading d-flex">
+    <img class="logoDeAcero" src="https://www.deacero.com/wp-content/themes/deacero-2018/images/logo.svg">
+  </div>
+
+  <!-- Nav Item - Pages Collapse Menu -->
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+      aria-controls="collapseTwo">
+      <i class="fas fa-fw fa-tachometer-alt text-white"></i>
+      <span class="text-white">Trituradora</span>
+    </a>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div class="bg-menu-gr py-2 collapse-inner rounded" id="drop">
+        <h6 class="collapse-header" style="color:#fd4f00">KPI's</h6>
+        <a class="collapse-item text-white" (click)="changeTo(1)">Producción</a>
+        <a class="collapse-item text-white" (click)="changeTo(2)">Merma</a>
+        <!--<a class="collapse-item text-white" (click)="changeTo(3)">Paros</a>-->
+        <a class="collapse-item text-white" (click)="changeTo(3)">Eficiencia</a>
+        <a class="collapse-item text-white" (click)="changeTo(4)">Predicciones</a>
+      </div>
+    </div>
+  </li>
+
+  <!-- Nav Item - Utilities Collapse Menu -->
+  <div *ngIf="isAdmin">
+      <li class="nav-item" >
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true"
+            aria-controls="collapseUtilities">
+            <i class="fas fa-fw fa-cog text-white"></i>
+            <span class="text-white">Gestionar Usuarios</span>
+          </a>
+          <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-menu-gr py-2 collapse-inner rounded" id="drop">
+              <h6 class="collapse-header" style="color:#fd4f00">Custom Utilities:</h6>
+              <a class="collapse-item text-white" (click)="changeTo(5)">Crear usuario</a>
+              <a class="collapse-item text-white" (click)="changeTo(6)">Ver usuarios</a>
+            </div>
+          </div>
+        </li>
+  </div>
+
+
+
+  <!-- Divider -->
+  <hr class="sidebar-divider d-none d-md-block">
+
+  <!-- Sidebar Toggler (Sidebar) -->
+  <div class="text-center d-none d-md-inline">
+    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+  </div>
+
+</ul>
+<!-- End of Sidebar -->

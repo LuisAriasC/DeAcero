@@ -1,0 +1,7 @@
+{
+    "/api/*": {
+      "target": "http://ubiquitous.csf.itesm.mx/~pddm-1020736/content/Deacero/Servicios",
+      "secure": false,
+      "pathRewrite": {"^/api" : ""}
+    }
+  }

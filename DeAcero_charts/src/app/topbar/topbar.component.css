@@ -1,0 +1,27 @@
+.bg-black{
+    background-color: #2e2e2e;
+}
+
+.bg-orange{
+    background-color: #fd4f00;
+}
+
+.btn-orange{
+    background-color: #fd4f00;
+}
+
+.text-orange{
+    color: #fd4f00;
+}
+
+.bg-menu-orange{
+    background-color: #fd4f00;
+}
+
+.bg-menu-gr{
+    background-color: #2e2e2e;
+}
+
+#drop a:hover{
+    background-color: #fd4f00;
+}

@@ -1,0 +1,59 @@
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <h1 class="h3 mb-2 text-black">Crear Usuario</h1>
+
+
+  <div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+      <div class="p-5">
+        <div class="text-center">
+          <h1 class="h4 mb-2"></h1>
+          <p class="text-black mb-4">Ingresa los datos del usuario</p>
+        </div>
+        <form class="user" #employeeForm="ngForm" (ngSubmit)="addEmployee(employeeForm)">
+          <!-- USER ID -->
+          <div class="form-group">
+            <input type="text" class="form-control form-control-user" name="username" #username="ngModel" [(ngModel)]="employeeService.selectedEmployee.username" placeholder="ID Usuario">
+          </div>
+          <!-- USER NAME -->
+          <div class="form-group">
+              <input type="text" class="form-control form-control-user" name="name" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.name" placeholder="Nombre del Usuario">
+          </div>
+          <!-- USER SURNAME -->
+          <div class="form-group">
+            <input type="text" class="form-control form-control-user" name="surname" #surname="ngModel" [(ngModel)]="employeeService.selectedEmployee.surname" placeholder="Apellidos del Usuario">
+          </div>
+          <!-- USER EMAIL -->
+          <div class="form-group">
+              <input type="text" class="form-control form-control-user" name="email" #email="ngModel" [(ngModel)]="employeeService.selectedEmployee.email" placeholder="Email">
+          </div>
+          <!-- USER PASSWORD -->
+          <div class="form-group">
+            <input type="password" class="form-control form-control-user" name="password" #password="ngModel" [(ngModel)]="employeeService.selectedEmployee.password" placeholder="Contraseña">
+          </div>
+
+          <div class="form-group">
+            <nav class="navbar navbar-expand navbar-light bg-light mb-4">
+              <a class="navbar-brand text-black" href="#">Permisos de Administrador</a>
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                  <select class="text-white btn btn-dark" (change)="selectChangeHandler($event)">
+                    <option value="False" selected="select">No</option>
+                    <option value="True">Si</option>
+                </select>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+          <input type="submit" value="Crear Usuario" class="btn btn-orange btn-user btn-block text-white" />
+          <hr>
+          <div class="col-lg-2"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

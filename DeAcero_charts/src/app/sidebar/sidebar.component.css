@@ -1,0 +1,64 @@
+.bg-black{
+    margin-bottom: 0;
+    background-color: #000;
+    height: 100vh;
+}
+
+.bg-orange{
+    background-color: #fd4f00;
+    height: 100vh;
+}
+
+.bg-menu-orange{
+    background-color: #fd4f00;
+}
+
+.bg-gr{
+    background-color: #2e2e2e;
+    height: 100vh;
+}
+
+.bg-menu-gr{
+    background-color: #2e2e2e;
+}
+
+.btn-black{
+    background-color: #000;
+}
+
+.btn-orange{
+    background-color: #fd4f00;
+}
+
+.btn-gr{
+    background-color: #2e2e2e;
+}
+
+.text-black{
+    color: #000;
+}
+
+.text-orange{
+    color: #fd4f00;
+}
+
+.text-gr{
+    color: #2e2e2e;
+}
+
+li > a:hover{
+    background-color: #fd4f00;
+}
+
+div a:hover{
+    background-color: #fd4f00;
+}
+
+#drop a:hover{
+    background-color: #fd4f00;
+}
+
+.logoDeAcero{
+    width: 100%;
+    height: 100%;
+}

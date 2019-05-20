@@ -1,0 +1,127 @@
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <h1 class="h3 mb-2 text-black">Ver Usuarios</h1>
+
+
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-orange">Usuarios</h6>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered text-black" id="dataTable" width="100%" cellspacing="0">
+          <thead  class="responsive-table">
+            <tr >
+              <th>Username</th>
+              <th>Name</th>
+              <th>Surname</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Status</th>
+              <th>Operators</th>
+            </tr>
+          </thead>
+
+          <tbody>
+              <tr *ngFor="let employee of employeeService.employees" >
+                <td>{{ employee.username }}</td>
+                <td>{{ employee.name }}</td>
+                <td>{{ employee.surname }}</td>
+                <td>{{ employee.email }}</td>
+                <td>{{ employee.role }}</td>
+                <td>{{ employee.status }}</td>
+                <td>
+                  <!-- <a (click)="editEmployee(employee)"> -->
+                  <a href="#" class="btn btn-primary btn-user btn-group text-white" (click)="activateEdit(employee)">
+                    Editar
+                  </a>
+                  <!-- <a (click)="deleteEmployee(employee._id)"> -->
+                  <a href="#" class="btn btn-secondary btn-user btn-group text-white" (click)="deleteEmployee(employee._id)">
+                      Borrar
+                  </a>
+                </td>
+              </tr>
+          </tbody>
+
+
+          <tfoot>
+              <tr >
+                  <th>Username</th>
+                  <th>Name</th>
+                  <th>Surname</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                  <th>Operators</th>
+                </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="editUser">
+  <div class="row">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-8">
+        <div class="p-5">
+          <div class="text-center">
+            <h1 class="h4 mb-2"></h1>
+            <p class="text-black mb-4">Ingresa los datos del usuario</p>
+          </div>
+          <form class="user" #employeeForm="ngForm" (ngSubmit)="editEmployee(employeeForm)">
+            <!-- USER ID -->
+            <div class="form-group">
+              <p class="left">User ID</p>
+              <input type="text" class="form-control form-control-user" name="username" #username="ngModel" [(ngModel)]="employeeService2.selectedEmployee.username" placeholder="ID Usuario">
+            </div>
+            <!-- USER NAME -->
+            <div class="form-group">
+              <p class="left">Nombre</p>
+              <input type="text" class="form-control form-control-user" name="name" #name="ngModel" [(ngModel)]="employeeService2.selectedEmployee.name" placeholder="Nombre del Usuario">
+            </div>
+            <!-- USER SURNAME -->
+            <div class="form-group">
+              <p class="left">Apellidos</p>
+              <input type="text" class="form-control form-control-user" name="surname" #surname="ngModel" [(ngModel)]="employeeService2.selectedEmployee.surname" placeholder="Apellidos del Usuario">
+            </div>
+            <!-- USER EMAIL -->
+            <div class="form-group">
+              <p class="left">Email</p>
+              <input type="text" class="form-control form-control-user" name="email" #email="ngModel" [(ngModel)]="employeeService2.selectedEmployee.email" placeholder="Email">
+            </div>
+            <!-- USER PASSWORD -->
+            <div class="form-group">
+              <p class="left">Password</p>
+              <input type="text" class="form-control form-control-user" name="password" #password="ngModel" [(ngModel)]="passUser" placeholder=" Nueva Contraseña (DEJAR VACIO SI NO SE QUIERE REESTABLECER)">
+            </div>
+
+            <!--
+            <div class="form-group">
+              <nav class="navbar navbar-expand navbar-light bg-light mb-4">
+                <a class="navbar-brand text-black" href="#">Permisos de Administrador</a>
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item dropdown">
+                    <select class="text-white btn btn-dark" (change)="selectChangeHandler($event)">
+                      <option value="False" selected="select">No</option>
+                      <option value="True">Si</option>
+                    </select>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            -->
+      
+            <input type="submit" value="Editar Usuario" class="btn btn-orange btn-user btn-block text-white" />
+            <hr>
+            <div class="col-lg-2"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

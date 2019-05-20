@@ -1,0 +1,38 @@
+.bg-black{
+    background-color: #000;
+    height: 100vh;
+}
+
+.bg-orange{
+    background-color: #fd4f00;
+    height: 100vh;
+}
+
+.bg-gr{
+    background-color: #2e2e2e;
+    height: 100vh;
+}
+
+.btn-black{
+    background-color: #000;
+}
+
+.btn-orange{
+    background-color: #fd4f00;
+}
+
+.btn-gr{
+    background-color: #2e2e2e;
+}
+
+.text-black{
+    color: #000;
+}
+
+.text-orange{
+    color: #fd4f00;
+}
+
+.text-gr{
+    color: #2e2e2e;
+}

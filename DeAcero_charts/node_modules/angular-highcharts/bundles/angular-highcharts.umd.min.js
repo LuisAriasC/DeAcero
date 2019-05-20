@@ -1,0 +1,29 @@
+!function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports,require("rxjs"),require("@angular/core"),require("highcharts")):"function"==typeof define&&define.amd?define("angular-highcharts",["exports","rxjs","@angular/core","highcharts"],e):e(t["angular-highcharts"]={},t.rxjs,t.ng.core,t.Highcharts)}(this,function(t,e,i,r){"use strict";var n=function(){function t(t){void 0===t&&(t={series:[]}),this.options=t,this.refSubject=new e.AsyncSubject,this.ref$=this.refSubject.asObservable()}return t.prototype.addPoint=function(e,i,r,n){void 0===i&&(i=0),void 0===r&&(r=!0),void 0===n&&(n=!1),this.ref$.subscribe(function(t){t.series.length>i&&t.series[i].addPoint(e,r,n)})},t.prototype.addSeries=function(e,i,r){void 0===i&&(i=!0),this.ref$.subscribe(function(t){t.addSeries(e,i,r)})},t.prototype.removePoint=function(e,i){void 0===i&&(i=0),this.ref$.subscribe(function(t){t.series.length>i&&t.series[i].data.length>e&&t.series[i].removePoint(e,!0)})},t.prototype.removeSeries=function(e){this.ref$.subscribe(function(t){t.series.length>e&&t.series[e].remove(!0)})},t.prototype.init=function(t){var e=this;this.ref||r.chart(t.nativeElement,this.options,function(t){e.refSubject.next(t),e.ref=t,e.refSubject.complete()})},t.prototype.destroy=function(){this.ref&&(this.options=this.ref.options,this.ref.destroy(),this.ref=undefined,this.refSubject=new e.AsyncSubject,this.ref$=this.refSubject.asObservable())},t}(),
+/**
+     * @license
+     * Copyright Felix Itzenplitz. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at
+     * https://github.com/cebor/angular-highcharts/blob/master/LICENSE
+     */s=function(){function t(t){void 0===t&&(t={series:[]}),this.options=t,this.refSubject=new e.AsyncSubject,this.ref$=this.refSubject.asObservable()}return t.prototype.init=function(t){var e=this;this.ref||r.mapChart(t.nativeElement,this.options,function(t){e.refSubject.next(t),e.ref=t,e.refSubject.complete()})},t.prototype.destroy=function(){this.ref&&(this.options=this.ref.options,this.ref.destroy(),this.ref=undefined,this.refSubject=new e.AsyncSubject,this.ref$=this.refSubject.asObservable())},t}(),
+/**
+     * @license
+     * Copyright Felix Itzenplitz. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at
+     * https://github.com/cebor/angular-highcharts/blob/master/LICENSE
+     *
+     * @author Felix Itzenplitz
+     * @author Timothy A. Perez (contributor)
+     */o=function(){function t(t){void 0===t&&(t={series:[]}),this.options=t,this.refSubject=new e.AsyncSubject,this.ref$=this.refSubject.asObservable()}return t.prototype.init=function(t){var e=this;this.ref||r.stockChart(t.nativeElement,this.options,function(t){e.refSubject.next(t),e.ref=t,e.refSubject.complete()})},t.prototype.destroy=function(){this.ref&&(this.options=this.ref.options,this.ref.destroy(),this.ref=undefined,this.refSubject=new e.AsyncSubject,this.ref$=this.refSubject.asObservable())},t}(),c=function(){function t(t){this.el=t}return t.prototype.ngOnChanges=function(t){t.chart.isFirstChange()||(this.destroy(),this.init())},t.prototype.ngOnInit=function(){this.init()},t.prototype.ngOnDestroy=function(){this.destroy()},t.prototype.init=function(){(this.chart instanceof n||this.chart instanceof o||this.chart instanceof s)&&this.chart.init(this.el)},t.prototype.destroy=function(){(this.chart instanceof n||this.chart instanceof o||this.chart instanceof s)&&this.chart.destroy()},t.decorators=[{type:i.Directive,args:[{selector:"[chart]"}]}],t.ctorParameters=function(){return[{type:i.ElementRef}]},t.propDecorators={chart:[{type:i.Input}]},t}(),h=new i.InjectionToken("HighchartsModules"),f=function(){function t(t){this.chartModules=t}return t.prototype.initModules=function(){this.chartModules.forEach(function(t){t(r)})},t.decorators=[{type:i.Injectable}],t.ctorParameters=function(){return[{type:Array,decorators:[{type:i.Inject,args:[h]}]}]},t}(),u=[],a=function(){function t(t){this.cs=t,this.cs.initModules()}return t.decorators=[{type:i.NgModule,args:[{exports:[c],declarations:[c],providers:[{provide:h,useValue:u},f]}]}],t.ctorParameters=function(){return[{type:f}]},t}();
+/**
+     * @license
+     * Copyright Felix Itzenplitz. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at
+     * https://github.com/cebor/angular-highcharts/blob/master/LICENSE
+     */t.Chart=n,t.ChartModule=a,t.HIGHCHARTS_MODULES=h,t.MapChart=s,t.StockChart=o,t.ɵb=c,t.ɵa=f,Object.defineProperty(t,"__esModule",{value:!0})});
+//# sourceMappingURL=angular-highcharts.umd.min.js.map
