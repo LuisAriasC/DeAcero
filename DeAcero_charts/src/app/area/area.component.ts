@@ -29,6 +29,8 @@ export class AreaComponent implements OnInit {
   private dataH34: number[];
   private h4Table: string;
   private dataH4: number[];
+  private p2Table: string;
+  private dataP2: number[];
 
   constructor(
     private graphService: GraphService
@@ -62,6 +64,22 @@ export class AreaComponent implements OnInit {
       response => {
         this.dataH34 = this.prepareJSON(response);
         this.chart3 = this.createChart(year, day, month, this.h34Table, this.dataH34);
+      }
+    );
+
+    this.h4Table = 'Heavy_4';
+    this.graphService.getDataGraph( this.h4Table, month, year).subscribe(
+      response => {
+        this.dataH4 = this.prepareJSON(response);
+        this.chart4 = this.createChart(year, day, month, this.h4Table, this.dataH4);
+      }
+    );
+
+    this.p2Table = 'Plus2_Heavy';
+    this.graphService.getDataGraph( this.p2Table, month, year).subscribe(
+      response => {
+        this.dataP2 = this.prepareJSON(response);
+        this.chart5 = this.createChart(year, day, month, this.p2Table, this.dataP2);
       }
     );
   }

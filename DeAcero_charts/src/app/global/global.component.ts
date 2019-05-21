@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GraphService } from '../services/graph.service';
+import { NgForm } from '@angular/forms';
 import { Chart } from 'angular-highcharts';
 
 import HighchartsMoreModule from 'highcharts/highcharts-more';
@@ -15,11 +16,11 @@ import OrganizationModule from 'highcharts/modules/organization';
 })
 export class GlobalComponent implements OnInit {
 
-  public entryChart;
-  public chart;
-  public chart2;
-  public chart3;
-  public outhart;
+  public entryChart: Chart;
+  public chart: Chart;
+  public chart2: Chart;
+  public chart3: Chart;
+  public outhart: Chart;
   private entryTable: string;
   private principalTable: string;
   private FTTable: string;
@@ -27,12 +28,17 @@ export class GlobalComponent implements OnInit {
   private dataPrincipal: number[];
   private dataFT: number[];
 
+  public selectedMonth: number;
+  public selectedYear: number;
+
   constructor(
     private graphService: GraphService
   ) { }
 
   ngOnInit() {
 
+    this.selectedMonth = 1;
+    this.selectedYear = 2018;
     const month = 1;
     const month2 = 2;
     const year = 2018;
@@ -65,6 +71,19 @@ export class GlobalComponent implements OnInit {
     );
   }
 
+  editGrapghs( form: NgForm) {
+    if ( !this.selectedMonth || !this.selectedYear ) {
+      form.reset();
+      alert('Faltan valores para obtener información');
+    } else {
+      console.log('Edit graphs');
+      console.log(this.selectedMonth);
+      console.log(this.selectedYear);
+
+      
+    }
+  }
+
   createDonut( title, y1, table1 ,y2, table2 ){
 
     let chart = new Chart({
@@ -92,8 +111,8 @@ export class GlobalComponent implements OnInit {
     return chart;
   }
 
-  createChart( year, day, month, table, data_ ) {
-    let chart = new Chart({
+  createChart( year: number, day: number, month: number, table: string, data: number[] ) {
+    const chart = new Chart({
       title: {
         text: table
       },
@@ -115,7 +134,7 @@ export class GlobalComponent implements OnInit {
       series: [
         {
           name: 'Toneladas',
-          data: this.prepareData(data_, month),
+          data: this.prepareData(data, month),
           type: 'column',
           color: 'green'
         }
@@ -127,7 +146,7 @@ export class GlobalComponent implements OnInit {
 
   createChart2( year, day, month, name, table1, data1, table2, data2 ) {
 
-    let chart = new Chart({
+    const chart = new Chart({
       title: {
         text: name
       },
@@ -162,13 +181,16 @@ export class GlobalComponent implements OnInit {
   prepareJSON(response) {
     const myJSON = JSON.stringify(response);
     const graph = JSON.parse(myJSON);
-    let body = graph.body;
+    const body = graph.body;
     return body;
   }
 
   prepareData(body, month) {
-    let len = body['Datos'].length;
-    let dat = [];
+    const datos = 'Datos';
+    const fecha = 'Fecha';
+    const toneladas = 'Toneladas';
+    const len = body[datos].length;
+    const dat = [];
     let dateStr: string;
     let d: string;
     let day: number;
@@ -178,9 +200,9 @@ export class GlobalComponent implements OnInit {
     let di = 1;
 
     // Llenado de días con info de api
-    for(i = 0; i < len; i++) {
-      dateStr = body['Datos'][i]['Fecha'];
-      tonsStr = body['Datos'][i]['Toneladas'];
+    for (i = 0; i < len; i++) {
+      dateStr = body[datos][i][fecha];
+      tonsStr = body[datos][i][toneladas];
       d = dateStr.substring(8, 10);
       day = parseInt(d, 10);
       tons = parseInt(tonsStr, 10);
@@ -201,10 +223,25 @@ export class GlobalComponent implements OnInit {
       days = 28;
     }
 
-    for(i = di - 1; i < days; i++) {
+    for (i = di - 1; i < days; i++) {
       dat.push(0.0);
     }
     return dat;
   }
+
+
+    // event handler for the select month
+    selectMonthHandler(event: any) {
+      this.selectedMonth = event.target.value;
+    }
+
+    // event handler for the select month
+    selectYearHandler(event: any) {
+      this.selectedYear = event.target.value;
+    }
+
+
+
+
 
 }
