@@ -79,8 +79,31 @@ export class GlobalComponent implements OnInit {
       console.log('Edit graphs');
       console.log(this.selectedMonth);
       console.log(this.selectedYear);
+      this.chart.destroy();
+      this.chart2.destroy();
 
-      
+      // Crea grafico para entradas 
+      this.graphService.getDataGraph( this.entryTable, this.selectedMonth, this.selectedYear).subscribe(
+      response => {
+        this.dataEntry = this.prepareJSON(response);
+        this.chart = this.createChart(this.selectedYear, 0, this.selectedMonth, this.entryTable, this.dataEntry);
+      });
+
+      // Crea grafico para salida 1 
+      this.graphService.getDataGraph( this.principalTable, this.selectedMonth, this.selectedYear).subscribe(
+        response => {
+          this.dataPrincipal = this.prepareJSON(response);
+          this.FTTable = 'Ferrous_Tramp';
+          // Crea grafico para salida 2
+          this.graphService.getDataGraph( this.FTTable, this.selectedMonth, this.selectedYear).subscribe(
+            response2 => {
+              this.dataFT = this.prepareJSON(response2);
+              this.chart2 = this.createChart2(this.selectedYear, 0, this.selectedMonth, 'Salidas', this.principalTable, this.dataPrincipal, this.FTTable, this.dataFT);
+              //this.chart3 = this.createDonut('Salidas', 90, this.principalTable, 10, this.FTTable);
+            }
+          );
+        }
+      );
     }
   }
 
