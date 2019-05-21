@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GraphService } from '../services/graph.service';
+import { NgForm } from '@angular/forms';
 import { Chart } from 'angular-highcharts';
 
 import HighchartsMoreModule from 'highcharts/highcharts-more';
@@ -32,56 +33,110 @@ export class AreaComponent implements OnInit {
   private p2Table: string;
   private dataP2: number[];
 
+  public selectedMonth: number;
+  public selectedYear: number;
+
   constructor(
     private graphService: GraphService
   ) { }
 
   ngOnInit() {
+    this.selectedMonth = 1;
+    this.selectedYear = 2018;
 
-    const month = 1;
-    const month2 = 2;
-    const year = 2019;
     const day = 0;
 
     this.nfLigthTable = 'Non_Ferrous_Light';
-    this.graphService.getDataGraph( this.nfLigthTable, month, year).subscribe(
+    this.graphService.getDataGraph( this.nfLigthTable, this.selectedMonth, this.selectedYear).subscribe(
       response => {
         this.datanfLight = this.prepareJSON(response);
-        this.chart = this.createChart(year, day, month, this.nfLigthTable, this.datanfLight);
+        this.chart = this.createChart(this.selectedYear, day, this.selectedMonth, this.nfLigthTable, this.datanfLight);
       }
     );
 
     this.h2Table = 'Heavy_2';
-    this.graphService.getDataGraph( this.h2Table, month, year).subscribe(
+    this.graphService.getDataGraph( this.h2Table, this.selectedMonth, this.selectedYear).subscribe(
       response => {
         this.dataH2 = this.prepareJSON(response);
-        this.chart2 = this.createChart(year, day, month, this.h2Table, this.dataH2);
+        this.chart2 = this.createChart(this.selectedYear, day, this.selectedMonth, this.h2Table, this.dataH2);
       }
     );
 
     this.h34Table = 'Heavy_3_4';
-    this.graphService.getDataGraph( this.h34Table, month, year).subscribe(
+    this.graphService.getDataGraph( this.h34Table, this.selectedMonth, this.selectedYear).subscribe(
       response => {
         this.dataH34 = this.prepareJSON(response);
-        this.chart3 = this.createChart(year, day, month, this.h34Table, this.dataH34);
+        this.chart3 = this.createChart(this.selectedYear, day, this.selectedMonth, this.h34Table, this.dataH34);
       }
     );
 
     this.h4Table = 'Heavy_4';
-    this.graphService.getDataGraph( this.h4Table, month, year).subscribe(
+    this.graphService.getDataGraph( this.h4Table, this.selectedMonth, this.selectedYear).subscribe(
       response => {
         this.dataH4 = this.prepareJSON(response);
-        this.chart4 = this.createChart(year, day, month, this.h4Table, this.dataH4);
+        this.chart4 = this.createChart(this.selectedYear, day, this.selectedMonth, this.h4Table, this.dataH4);
       }
     );
 
     this.p2Table = 'Plus2_Heavy';
-    this.graphService.getDataGraph( this.p2Table, month, year).subscribe(
+    this.graphService.getDataGraph( this.p2Table, this.selectedMonth, this.selectedYear).subscribe(
       response => {
         this.dataP2 = this.prepareJSON(response);
-        this.chart5 = this.createChart(year, day, month, this.p2Table, this.dataP2);
+        this.chart5 = this.createChart(this.selectedYear, day, this.selectedMonth, this.p2Table, this.dataP2);
       }
     );
+  }
+
+  editGrapghs( form: NgForm) {
+    if ( !this.selectedMonth || !this.selectedYear ) {
+      form.reset();
+      alert('Faltan valores para obtener información');
+    } else {
+      //console.log('Edit graphs');
+      //console.log(this.selectedMonth);
+      //console.log(this.selectedYear);
+      this.chart.destroy();
+      this.chart2.destroy();
+
+      // Crea grafico para entradas 
+      this.graphService.getDataGraph( this.nfLigthTable, this.selectedMonth, this.selectedYear).subscribe(
+      response => {
+        this.datanfLight = this.prepareJSON(response);
+        this.chart = this.createChart(this.selectedYear, 0, this.selectedMonth, this.nfLigthTable, this.datanfLight);
+      });
+
+      this.h2Table = 'Heavy_2';
+      this.graphService.getDataGraph( this.h2Table, this.selectedMonth, this.selectedYear).subscribe(
+        response => {
+          this.dataH2 = this.prepareJSON(response);
+          this.chart2 = this.createChart(this.selectedYear, 0, this.selectedMonth, this.h2Table, this.dataH2);
+        }
+      );
+  
+      this.h34Table = 'Heavy_3_4';
+      this.graphService.getDataGraph( this.h34Table, this.selectedMonth, this.selectedYear).subscribe(
+        response => {
+          this.dataH34 = this.prepareJSON(response);
+          this.chart3 = this.createChart(this.selectedYear, 0, this.selectedMonth, this.h34Table, this.dataH34);
+        }
+      );
+  
+      this.h4Table = 'Heavy_4';
+      this.graphService.getDataGraph( this.h4Table, this.selectedMonth, this.selectedYear).subscribe(
+        response => {
+          this.dataH4 = this.prepareJSON(response);
+          this.chart4 = this.createChart(this.selectedYear, 0, this.selectedMonth, this.h4Table, this.dataH4);
+        }
+      );
+  
+      this.p2Table = 'Plus2_Heavy';
+      this.graphService.getDataGraph( this.p2Table, this.selectedMonth, this.selectedYear).subscribe(
+        response => {
+          this.dataP2 = this.prepareJSON(response);
+          this.chart5 = this.createChart(this.selectedYear, 0, this.selectedMonth, this.p2Table, this.dataP2);
+        }
+      );
+    }
   }
 
   createDonut( title: string,  y1: number, table1: string, y2: number, table2: string ) {
@@ -112,8 +167,8 @@ export class AreaComponent implements OnInit {
   }
 
   createChart( year: number, day: number, month: number, table: string, data: number[] ) {
-    console.log(data);
-    console.log(this.prepareData(data, month));
+    //console.log(data);
+    //console.log(this.prepareData(data, month));
     const chart = new Chart({
       title: {
         text: table
@@ -190,8 +245,8 @@ export class AreaComponent implements OnInit {
   }
 
   prepareData(body, month: number) {
-    console.log(body);
-    console.log(month);
+    //console.log(body);
+    //console.log(month);
     const datos = 'Datos';
     const fecha = 'Fecha';
     const toneladas = 'Toneladas'
@@ -234,51 +289,13 @@ export class AreaComponent implements OnInit {
     }
     return dat;
   }
-//
-//  chart3 = new Chart({
-//    chart: {
-//      type: 'line'
-//    },
-//    title: {
-//      text: 'Ferroso Pesado'
-//    },
-//    credits: {
-//      enabled: false
-//    },
-//    series: [
-//      {
-//        name: 'Toneladas',
-//        data: [{ y: 2752, x: 1, color: 'black' },
-//        { y: 5369, x: 2, color: 'yellow' },
-//        { y: 6245, x: 3, color: 'red' },
-//        { y: 7510, x: 4, color: 'blue' },
-//        { y: 3500, x: 5, color: 'pink' }],
-//        type: "column"
-//      }
-//    ]
-//  });
-//
-//  chart4 = new Chart({
-//    chart: {
-//      type: 'line'
-//    },
-//    title: {
-//      text: 'Otro'
-//    },
-//    credits: {
-//      enabled: false
-//    },
-//    series: [
-//      {
-//        name: 'Toneladas',
-//        data: [{ y: 2000, x: 1, color: 'green' },
-//        { y: 8000, x: 2, color: 'blue' },
-//        { y: 10000, x: 3, color: 'red' },
-//        { y: 4000, x: 4, color: 'orange' },
-//        { y: 6000, x: 5, color: 'brown' }],
-//        type: "spline"
-//      }
-//    ]
-//  });
-//
+
+  // event handler for the select month
+  selectMonthHandler(event: any) {
+    this.selectedMonth = event.target.value;
+  }
+  // event handler for the select month
+  selectYearHandler(event: any) {
+    this.selectedYear = event.target.value;
+  }
 }

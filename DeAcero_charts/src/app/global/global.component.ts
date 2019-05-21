@@ -39,31 +39,28 @@ export class GlobalComponent implements OnInit {
 
     this.selectedMonth = 1;
     this.selectedYear = 2018;
-    const month = 1;
-    const month2 = 2;
-    const year = 2018;
     const day = 0;
 
     this.entryTable = 'Entrada';
     // Crea grafico para entradas 
-    this.graphService.getDataGraph( this.entryTable, month, year).subscribe(
+    this.graphService.getDataGraph( this.entryTable, this.selectedMonth, this.selectedYear).subscribe(
       response => {
         this.dataEntry = this.prepareJSON(response);
-        this.chart = this.createChart(year, day, month, this.entryTable, this.dataEntry);
+        this.chart = this.createChart(this.selectedYear, day, this.selectedMonth, this.entryTable, this.dataEntry);
       }
     );
 
     this.principalTable = 'Principal';
     // Crea grafico para salida 1 
-    this.graphService.getDataGraph( this.principalTable, month, year).subscribe(
+    this.graphService.getDataGraph( this.principalTable, this.selectedMonth, this.selectedYear).subscribe(
       response => {
         this.dataPrincipal = this.prepareJSON(response);
         this.FTTable = 'Ferrous_Tramp';
         // Crea grafico para salida 2
-        this.graphService.getDataGraph( this.FTTable, month2, year).subscribe(
+        this.graphService.getDataGraph( this.FTTable, this.selectedMonth + 1, this.selectedYear).subscribe(
           response2 => {
             this.dataFT = this.prepareJSON(response2);
-            this.chart2 = this.createChart2(year, day, month, 'Salidas', this.principalTable, this.dataPrincipal, this.FTTable, this.dataFT);
+            this.chart2 = this.createChart2(this.selectedYear, day, this.selectedMonth, 'Salidas', this.principalTable, this.dataPrincipal, this.FTTable, this.dataFT);
             //this.chart3 = this.createDonut('Salidas', 90, this.principalTable, 10, this.FTTable);
           }
         );
@@ -76,9 +73,9 @@ export class GlobalComponent implements OnInit {
       form.reset();
       alert('Faltan valores para obtener información');
     } else {
-      console.log('Edit graphs');
-      console.log(this.selectedMonth);
-      console.log(this.selectedYear);
+      //console.log('Edit graphs');
+      //console.log(this.selectedMonth);
+      //console.log(this.selectedYear);
       this.chart.destroy();
       this.chart2.destroy();
 
