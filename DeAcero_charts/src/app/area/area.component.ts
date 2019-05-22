@@ -25,13 +25,13 @@ export class AreaComponent implements OnInit {
   private nfLigthTable: string;
   private datanfLight: number[];
   private h2Table: string;
-  private dataH2: number[];
+  private dataH2;
   private h34Table: string;
-  private dataH34: number[];
+  private dataH34;
   private h4Table: string;
-  private dataH4: number[];
+  private dataH4;
   private p2Table: string;
-  private dataP2: number[];
+  private dataP2;
 
   public selectedMonth: number;
   public selectedYear: number;
@@ -97,7 +97,9 @@ export class AreaComponent implements OnInit {
       //console.log(this.selectedYear);
       this.chart.destroy();
       this.chart2.destroy();
-
+      this.chart3.destroy();
+      this.chart4.destroy();
+      this.chart5.destroy();
       // Crea grafico para entradas 
       this.graphService.getDataGraph( this.nfLigthTable, this.selectedMonth, this.selectedYear).subscribe(
       response => {
@@ -166,7 +168,7 @@ export class AreaComponent implements OnInit {
     return chart;
   }
 
-  createChart( year: number, day: number, month: number, table: string, data: number[] ) {
+  createChart( year: number, day: number, month: number, table: string, data ) {
     //console.log(data);
     //console.log(this.prepareData(data, month));
     const chart = new Chart({

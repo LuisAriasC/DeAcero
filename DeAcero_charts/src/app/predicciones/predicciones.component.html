@@ -4,9 +4,30 @@
   <!-- Page Heading -->
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-black">Predicciones</h1>
-
   </div>
-<hr>
+  <hr>
+
+  <div class="row">
+      <div class="col-12 d-flex justify-content-center">
+
+        
+        <form class="user form-inline" #predictionForm="ngForm" (ngSubmit) = "editGrapghs(predictionForm)" >
+          <div class="form-group mx-3 mb-2">
+              <select class="custom-select" (change)="selectYearHandler($event)">
+                  <option value="2019" selected>2019</option>
+                  <option value="2020">2020</option>
+                  <option value="2021">2021</option>
+                  <option value="2022">2022</option>
+                  <option value="2023">2023</option>
+                  <option value="2024">2024</option>
+                  <option value="2025">2025</option>
+                </select>
+          </div>
+          <input type="submit" value="Go" class="btn btn-success mb-2" />
+        </form>
+      </div>
+    </div>
+
   <!-- Content Row -->
   <div class="row">
 
