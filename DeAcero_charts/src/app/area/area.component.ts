@@ -58,7 +58,7 @@ export class AreaComponent implements OnInit {
     this.graphService.getDataGraph( this.h2Table, this.selectedMonth, this.selectedYear).subscribe(
       response => {
         this.dataH2 = this.prepareJSON(response);
-        this.chart2 = this.createChart(this.selectedYear, day, this.selectedMonth, this.h2Table, this.dataH2);
+        this.chart2 = this.createChart2(this.selectedYear, day, this.selectedMonth, this.h2Table, this.dataH2);
       }
     );
 
@@ -66,7 +66,7 @@ export class AreaComponent implements OnInit {
     this.graphService.getDataGraph( this.h34Table, this.selectedMonth, this.selectedYear).subscribe(
       response => {
         this.dataH34 = this.prepareJSON(response);
-        this.chart3 = this.createChart(this.selectedYear, day, this.selectedMonth, this.h34Table, this.dataH34);
+        this.chart3 = this.createChart3(this.selectedYear, day, this.selectedMonth, this.h34Table, this.dataH34);
       }
     );
 
@@ -74,7 +74,7 @@ export class AreaComponent implements OnInit {
     this.graphService.getDataGraph( this.h4Table, this.selectedMonth, this.selectedYear).subscribe(
       response => {
         this.dataH4 = this.prepareJSON(response);
-        this.chart4 = this.createChart(this.selectedYear, day, this.selectedMonth, this.h4Table, this.dataH4);
+        this.chart4 = this.createChart4(this.selectedYear, day, this.selectedMonth, this.h4Table, this.dataH4);
       }
     );
 
@@ -82,7 +82,7 @@ export class AreaComponent implements OnInit {
     this.graphService.getDataGraph( this.p2Table, this.selectedMonth, this.selectedYear).subscribe(
       response => {
         this.dataP2 = this.prepareJSON(response);
-        this.chart5 = this.createChart(this.selectedYear, day, this.selectedMonth, this.p2Table, this.dataP2);
+        this.chart5 = this.createChart5(this.selectedYear, day, this.selectedMonth, this.p2Table, this.dataP2);
       }
     );
   }
@@ -111,7 +111,7 @@ export class AreaComponent implements OnInit {
       this.graphService.getDataGraph( this.h2Table, this.selectedMonth, this.selectedYear).subscribe(
         response => {
           this.dataH2 = this.prepareJSON(response);
-          this.chart2 = this.createChart(this.selectedYear, 1, this.selectedMonth, this.h2Table, this.dataH2);
+          this.chart2 = this.createChart2(this.selectedYear, 1, this.selectedMonth, this.h2Table, this.dataH2);
         }
       );
   
@@ -119,7 +119,7 @@ export class AreaComponent implements OnInit {
       this.graphService.getDataGraph( this.h34Table, this.selectedMonth, this.selectedYear).subscribe(
         response => {
           this.dataH34 = this.prepareJSON(response);
-          this.chart3 = this.createChart(this.selectedYear, 1, this.selectedMonth, this.h34Table, this.dataH34);
+          this.chart3 = this.createChart3(this.selectedYear, 1, this.selectedMonth, this.h34Table, this.dataH34);
         }
       );
   
@@ -127,7 +127,7 @@ export class AreaComponent implements OnInit {
       this.graphService.getDataGraph( this.h4Table, this.selectedMonth, this.selectedYear).subscribe(
         response => {
           this.dataH4 = this.prepareJSON(response);
-          this.chart4 = this.createChart(this.selectedYear, 1, this.selectedMonth, this.h4Table, this.dataH4);
+          this.chart4 = this.createChart4(this.selectedYear, 1, this.selectedMonth, this.h4Table, this.dataH4);
         }
       );
   
@@ -135,40 +135,86 @@ export class AreaComponent implements OnInit {
       this.graphService.getDataGraph( this.p2Table, this.selectedMonth, this.selectedYear).subscribe(
         response => {
           this.dataP2 = this.prepareJSON(response);
-          this.chart5 = this.createChart(this.selectedYear, 1, this.selectedMonth, this.p2Table, this.dataP2);
+          this.chart5 = this.createChart5(this.selectedYear, 1, this.selectedMonth, this.p2Table, this.dataP2);
         }
       );
     }
   }
 
-  createDonut( title: string,  y1: number, table1: string, y2: number, table2: string ) {
+ 
 
+  createChart( year: number, day: number, month: number, table: string, data ) {
+    //console.log(data);
+    //console.log(this.prepareData(data, month));
     const chart = new Chart({
-      chart: {
-        type: 'line'
-      },
       title: {
-        text: title
+        text: table
+      },
+      xAxis: {
+        type: 'datetime'
+      },
+      yAxis: {
+        type: 'linear'
       },
       credits: {
         enabled: false
       },
+      plotOptions: {
+        series: {
+          pointStart: Date.UTC(year, month - 1, day),
+          pointIntervalUnit: 'day'
+        }
+      },
       series: [
         {
-          name: 'Porcentaje',
-          data: [
-            {y: y1, color: 'green', name: table1},
-            {y: y2, color: 'blue', name: table2}
-          ],
-          type: 'pie'
+          name: 'Toneladas',
+          data: this.prepareData(data, month),
+          type: 'column',
+          color: 'blue'
         }
       ]
+
     });
 
     return chart;
   }
 
-  createChart( year: number, day: number, month: number, table: string, data ) {
+  createChart2( year: number, day: number, month: number, table: string, data ) {
+    //console.log(data);
+    //console.log(this.prepareData(data, month));
+    const chart = new Chart({
+      title: {
+        text: table
+      },
+      xAxis: {
+        type: 'datetime'
+      },
+      yAxis: {
+        type: 'linear'
+      },
+      credits: {
+        enabled: false
+      },
+      plotOptions: {
+        series: {
+          pointStart: Date.UTC(year, month - 1, day),
+          pointIntervalUnit: 'day'
+        }
+      },
+      series: [
+        {
+          name: 'Toneladas',
+          data: this.prepareData(data, month),
+          type: 'column',
+          color: 'red'
+        }
+      ]
+
+    });
+
+    return chart;
+  }
+  createChart3( year: number, day: number, month: number, table: string, data ) {
     //console.log(data);
     //console.log(this.prepareData(data, month));
     const chart = new Chart({
@@ -203,15 +249,18 @@ export class AreaComponent implements OnInit {
 
     return chart;
   }
-
-  createChart2( year, day, month, name, table1, data1, table2, data2 ) {
-
+  createChart4( year: number, day: number, month: number, table: string, data ) {
+    //console.log(data);
+    //console.log(this.prepareData(data, month));
     const chart = new Chart({
       title: {
-        text: name
+        text: table
       },
       xAxis: {
         type: 'datetime'
+      },
+      yAxis: {
+        type: 'linear'
       },
       credits: {
         enabled: false
@@ -224,20 +273,54 @@ export class AreaComponent implements OnInit {
       },
       series: [
         {
-          name: table1,
-          data: this.prepareData(data1, month),
-          type: 'line'
-        },
-        {
-          name: table2,
-          data: this.prepareData(data2, month),
-          type: 'line'
+          name: 'Toneladas',
+          data: this.prepareData(data, month),
+          type: 'column',
+          color: 'yellow'
         }
       ]
+
     });
 
     return chart;
   }
+  createChart5( year: number, day: number, month: number, table: string, data ) {
+    //console.log(data);
+    //console.log(this.prepareData(data, month));
+    const chart = new Chart({
+      title: {
+        text: table
+      },
+      xAxis: {
+        type: 'datetime'
+      },
+      yAxis: {
+        type: 'linear'
+      },
+      credits: {
+        enabled: false
+      },
+      plotOptions: {
+        series: {
+          pointStart: Date.UTC(year, month - 1, day),
+          pointIntervalUnit: 'day'
+        }
+      },
+      series: [
+        {
+          name: 'Toneladas',
+          data: this.prepareData(data, month),
+          type: 'column',
+          color: 'brown'
+        }
+      ]
+
+    });
+
+    return chart;
+  }
+
+ 
 
   prepareJSON(response) {
     const myJSON = JSON.stringify(response);
