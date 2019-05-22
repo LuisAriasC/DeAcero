@@ -1,0 +1,110 @@
+<nav class="navbar sticky-top navbar-dark bg-dark">
+    <a class="navbar-brand mainTitle" href="#">Vista General</a>
+    <button class="btn btn-dark my-2 my-sm-0" type="submit">Ingresar</button>
+  </nav>
+<div class="container-fluid bg-header" id="home">
+  <div class="overlay-grey">
+    <!--
+      <div class="container">
+      <div class="row">
+        <div class="banner-text wow bounceInDown" data-wow-delay="0.2s">
+          <h1>DeAcero</h1>
+          <p> COMMITED WITH <br>SUSTAINABLE GROWTH</p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+
+        <div class=" col text-center wow bounceInUp" data-wow-delay="0.2s">
+          <button type="button" class="btn btn-lg btn-outline-light" id="botonLog" (click)="isON = false">Login</button>
+        </div>
+      </div>
+    </div>
+   -->
+    <div class="container-fluid pt-4 graphics">
+
+      <!-- Page Heading -->
+      
+
+      <!-- Content Row -->
+
+      <!-- Content Row -->
+      <div class="row">
+
+        <div class="col-xl-6 col-lg-6">
+          <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+              <h6 class="m-0 font-weight-bold text-orange">Entrada</h6>
+
+            </div>
+            <!-- Card Body -->
+
+            <div [chart]="chart"></div>
+
+          </div>
+        </div>
+
+        <div class="col-xl-6 col-lg-6">
+          <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+              <h6 class="m-0 font-weight-bold text-orange">Salida 2</h6>
+
+            </div>
+            <!-- Card Body -->
+
+            <div [chart]="chart2"></div>
+
+          </div>
+        </div>
+
+        <!-- End of Content Wrapper -->
+      </div>
+      <div class="row">
+
+        <div class="col-xl-6 col-lg-6">
+          <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+              <h6 class="m-0 font-weight-bold text-orange">Salida 3</h6>
+
+            </div>
+            <!-- Card Body -->
+
+            <div [chart]="chart3"></div>
+
+          </div>
+        </div>
+
+        <div class="col-xl-6 col-lg-6">
+          <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+              <h6 class="m-0 font-weight-bold text-orange">Predicciones</h6>
+
+            </div>
+            <!-- Card Body -->
+
+            <div [chart]="chart4"></div>
+
+          </div>
+        </div>
+
+        <!-- End of Content Wrapper -->
+      </div>
+      <!-- End of Page Wrapper -->
+    </div>
+
+  </div>
+</div>
+<!-- Footer -->
+<footer class="page-footer bg-dark text-white colorfooter">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2019 Copyright: Team1
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->

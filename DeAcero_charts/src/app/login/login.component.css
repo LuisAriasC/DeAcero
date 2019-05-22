@@ -10,3 +10,21 @@
 .text-orange{
     color: #fd4f00;
 }
+
+.loginContent{
+    padding-block-start: 10%;
+    padding-block-end: 10%;
+    z-index: 1;
+    filter:brightness(1);
+
+}
+
+.bgLogin{
+    background-image: url(../../assets/slider-4.jpg);
+    background-size: cover;
+    overflow: hidden;
+}
+
+.title1{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}

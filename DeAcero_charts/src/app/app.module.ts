@@ -24,6 +24,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 
 import { ChartModule } from 'angular-highcharts';
+import { LandingpageComponent } from './landingpage/landingpage.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ChartModule } from 'angular-highcharts';
     ForgotPasswordComponent,
     MainScreenComponent,
     HomeComponent,
-    AboutComponent
+    AboutComponent,
+    LandingpageComponent
   ],
   imports: [
     BrowserModule,
