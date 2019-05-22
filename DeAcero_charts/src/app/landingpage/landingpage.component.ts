@@ -39,7 +39,7 @@ export class LandingpageComponent implements OnInit {
 
   ngOnInit() {
 
-    this.selectedMonth = 1;
+    this.selectedMonth = 4;
     this.selectedYear = 2018;
     this.selectedYear2 = 2020;
     const day = 0;
