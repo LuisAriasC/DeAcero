@@ -104,14 +104,14 @@ export class AreaComponent implements OnInit {
       this.graphService.getDataGraph( this.nfLigthTable, this.selectedMonth, this.selectedYear).subscribe(
       response => {
         this.datanfLight = this.prepareJSON(response);
-        this.chart = this.createChart(this.selectedYear, 0, this.selectedMonth, this.nfLigthTable, this.datanfLight);
+        this.chart = this.createChart(this.selectedYear, 1, this.selectedMonth, this.nfLigthTable, this.datanfLight);
       });
 
       this.h2Table = 'Heavy_2';
       this.graphService.getDataGraph( this.h2Table, this.selectedMonth, this.selectedYear).subscribe(
         response => {
           this.dataH2 = this.prepareJSON(response);
-          this.chart2 = this.createChart(this.selectedYear, 0, this.selectedMonth, this.h2Table, this.dataH2);
+          this.chart2 = this.createChart(this.selectedYear, 1, this.selectedMonth, this.h2Table, this.dataH2);
         }
       );
   
@@ -119,7 +119,7 @@ export class AreaComponent implements OnInit {
       this.graphService.getDataGraph( this.h34Table, this.selectedMonth, this.selectedYear).subscribe(
         response => {
           this.dataH34 = this.prepareJSON(response);
-          this.chart3 = this.createChart(this.selectedYear, 0, this.selectedMonth, this.h34Table, this.dataH34);
+          this.chart3 = this.createChart(this.selectedYear, 1, this.selectedMonth, this.h34Table, this.dataH34);
         }
       );
   
@@ -127,7 +127,7 @@ export class AreaComponent implements OnInit {
       this.graphService.getDataGraph( this.h4Table, this.selectedMonth, this.selectedYear).subscribe(
         response => {
           this.dataH4 = this.prepareJSON(response);
-          this.chart4 = this.createChart(this.selectedYear, 0, this.selectedMonth, this.h4Table, this.dataH4);
+          this.chart4 = this.createChart(this.selectedYear, 1, this.selectedMonth, this.h4Table, this.dataH4);
         }
       );
   
@@ -135,7 +135,7 @@ export class AreaComponent implements OnInit {
       this.graphService.getDataGraph( this.p2Table, this.selectedMonth, this.selectedYear).subscribe(
         response => {
           this.dataP2 = this.prepareJSON(response);
-          this.chart5 = this.createChart(this.selectedYear, 0, this.selectedMonth, this.p2Table, this.dataP2);
+          this.chart5 = this.createChart(this.selectedYear, 1, this.selectedMonth, this.p2Table, this.dataP2);
         }
       );
     }
@@ -186,7 +186,7 @@ export class AreaComponent implements OnInit {
       },
       plotOptions: {
         series: {
-          pointStart: Date.UTC(year, day, month),
+          pointStart: Date.UTC(year, month - 1, day),
           pointIntervalUnit: 'day'
         }
       },
@@ -218,7 +218,7 @@ export class AreaComponent implements OnInit {
       },
       plotOptions: {
         series: {
-          pointStart: Date.UTC(year, day, month),
+          pointStart: Date.UTC(year, month - 1, day),
           pointIntervalUnit: 'day'
         }
       },

@@ -58,7 +58,7 @@ export class GlobalComponent implements OnInit {
         this.dataPrincipal = this.prepareJSON(response);
         this.FTTable = 'Ferrous_Tramp';
         // Crea grafico para salida 2
-        this.graphService.getDataGraph( this.FTTable, this.selectedMonth + 1, this.selectedYear).subscribe(
+        this.graphService.getDataGraph( this.FTTable, this.selectedMonth, this.selectedYear).subscribe(
           response2 => {
             this.dataFT = this.prepareJSON(response2);
             this.chart2 = this.createChart2(this.selectedYear, day, this.selectedMonth, 'Salidas', this.principalTable, this.dataPrincipal, this.FTTable, this.dataFT);
@@ -84,7 +84,7 @@ export class GlobalComponent implements OnInit {
       this.graphService.getDataGraph( this.entryTable, this.selectedMonth, this.selectedYear).subscribe(
       response => {
         this.dataEntry = this.prepareJSON(response);
-        this.chart = this.createChart(this.selectedYear, 0, this.selectedMonth, this.entryTable, this.dataEntry);
+        this.chart = this.createChart(this.selectedYear, 1, this.selectedMonth, this.entryTable, this.dataEntry);
       });
 
       // Crea grafico para salida 1 
@@ -96,7 +96,7 @@ export class GlobalComponent implements OnInit {
           this.graphService.getDataGraph( this.FTTable, this.selectedMonth, this.selectedYear).subscribe(
             response2 => {
               this.dataFT = this.prepareJSON(response2);
-              this.chart2 = this.createChart2(this.selectedYear, 0, this.selectedMonth, 'Salidas', this.principalTable, this.dataPrincipal, this.FTTable, this.dataFT);
+              this.chart2 = this.createChart2(this.selectedYear, 1, this.selectedMonth, 'Salidas', this.principalTable, this.dataPrincipal, this.FTTable, this.dataFT);
               //this.chart3 = this.createDonut('Salidas', 90, this.principalTable, 10, this.FTTable);
             }
           );
@@ -133,6 +133,7 @@ export class GlobalComponent implements OnInit {
   }
 
   createChart( year: number, day: number, month: number, table: string, data: number[] ) {
+    //console.log(year + ' ' + day + ' ' + month);
     const chart = new Chart({
       title: {
         text: table
@@ -148,7 +149,7 @@ export class GlobalComponent implements OnInit {
       },
       plotOptions: {
         series: {
-          pointStart: Date.UTC(year, day, month),
+          pointStart: Date.UTC(year, month - 1, day),
           pointIntervalUnit: 'day'
         }
       },
@@ -166,7 +167,7 @@ export class GlobalComponent implements OnInit {
   }
 
   createChart2( year, day, month, name, table1, data1, table2, data2 ) {
-
+    //console.log(year + ' ' + day + ' ' + month);
     const chart = new Chart({
       title: {
         text: name
@@ -179,7 +180,7 @@ export class GlobalComponent implements OnInit {
       },
       plotOptions: {
         series: {
-          pointStart: Date.UTC(year, day, month),
+          pointStart: Date.UTC(year, month - 1, day),
           pointIntervalUnit: 'day'
         }
       },
